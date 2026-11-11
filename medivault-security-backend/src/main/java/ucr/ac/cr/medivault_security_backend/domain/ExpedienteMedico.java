@@ -34,28 +34,66 @@ public class ExpedienteMedico {
     @Column(name = "fecha_registro", insertable = false, updatable = false)
     private LocalDateTime fechaRegistro;
 
-    public ExpedienteMedico() {}
+    public ExpedienteMedico() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Usuario getPaciente() { return paciente; }
-    public void setPaciente(Usuario paciente) { this.paciente = paciente; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Usuario getMedicoAsignado() { return medicoAsignado; }
-    public void setMedicoAsignado(Usuario m) { this.medicoAsignado = m; }
+    public Usuario getPaciente() {
+        return paciente;
+    }
 
-    public String getCodigoExpediente() { return codigoExpediente; }
-    public void setCodigoExpediente(String c) { this.codigoExpediente = c; }
+    public void setPaciente(Usuario paciente) {
+        this.paciente = paciente;
+    }
 
-    public String getDiagnosticoPrincipal() { return diagnosticoPrincipal; }
-    public void setDiagnosticoPrincipal(String d) { this.diagnosticoPrincipal = d; }
+    public Usuario getMedicoAsignado() {
+        return medicoAsignado;
+    }
 
-    public String getNotasClinicas() { return notasClinicas; }
-    public void setNotasClinicas(String notas) { this.notasClinicas = notas; }
+    public void setMedicoAsignado(Usuario m) {
+        this.medicoAsignado = m;
+    }
 
-    public String getNivelConfidencialidad() { return nivelConfidencialidad; }
-    public void setNivelConfidencialidad(String n) { this.nivelConfidencialidad = n; }
+    public String getCodigoExpediente() {
+        return codigoExpediente;
+    }
 
-    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
+    public void setCodigoExpediente(String c) {
+        this.codigoExpediente = c;
+    }
+
+    public String getDiagnosticoPrincipal() {
+        return diagnosticoPrincipal;
+    }
+
+    public void setDiagnosticoPrincipal(String d) {
+        this.diagnosticoPrincipal = d;
+    }
+
+    public String getNotasClinicas() {
+        return notasClinicas;
+    }
+
+    public void setNotasClinicas(String notas) {
+        this.notasClinicas = notas;
+    }
+
+    public String getNivelConfidencialidad() {
+        return nivelConfidencialidad;
+    }
+
+    public void setNivelConfidencialidad(String n) {
+        this.nivelConfidencialidad = n;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
 }

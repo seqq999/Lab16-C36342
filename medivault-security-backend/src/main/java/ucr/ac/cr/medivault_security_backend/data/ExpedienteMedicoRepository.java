@@ -1,11 +1,14 @@
 package ucr.ac.cr.medivault_security_backend.data;
 
-import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.*;
-import org.springframework.stereotype.Repository;
-import ucr.ac.cr.medivault_security_backend.domain.ExpedienteMedico;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import ucr.ac.cr.medivault_security_backend.domain.ExpedienteMedico;
 
 @Repository
 public interface ExpedienteMedicoRepository extends JpaRepository<ExpedienteMedico, Long> {
@@ -14,8 +17,8 @@ public interface ExpedienteMedicoRepository extends JpaRepository<ExpedienteMedi
 
     // Consulta JPA parametrizada contra SQLi
     @Query("SELECT e FROM ExpedienteMedico e " +
-           "JOIN FETCH e.paciente " +
-           "JOIN FETCH e.medicoAsignado " +
-           "WHERE e.id = :id")
+            "JOIN FETCH e.paciente " +
+            "JOIN FETCH e.medicoAsignado " +
+            "WHERE e.id = :id")
     Optional<ExpedienteMedico> findByIdWithDetails(@Param("id") Long id);
 }

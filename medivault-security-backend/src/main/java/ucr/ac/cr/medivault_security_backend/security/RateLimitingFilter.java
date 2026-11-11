@@ -1,37 +1,35 @@
 package ucr.ac.cr.medivault_security_backend.security;
 
-import io.github.bucket4j.*;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Rate Limiting con algoritmo Token Bucket (Bucket4j).
- * Reto A: en lugar de un cubo global compartido, cada IP de cliente tiene su propio cubo.
- */
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.Bucket;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Component
 public class RateLimitingFilter extends OncePerRequestFilter {
 
-    // Reto A: login -> 5 peticiones por minuto POR IP
     private static final int LOGIN_LIMITE_POR_MINUTO = 5;
     // Expedientes -> 30 peticiones por minuto POR IP
     private static final int API_LIMITE_POR_MINUTO = 30;
 
-    // Un cubo independiente por direccion IP (thread-safe)
     private final Map<String, Bucket> authBuckets = new ConcurrentHashMap<>();
     private final Map<String, Bucket> apiBuckets = new ConcurrentHashMap<>();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+            FilterChain filterChain) throws ServletException, IOException {
         String path = request.getRequestURI();
         String ip = ClientIpResolver.resolve(request);
         Bucket target = null;
@@ -60,7 +58,7 @@ public class RateLimitingFilter extends OncePerRequestFilter {
                           "instance": "%s"
                         }
                         """.formatted("https://medivault.cr/rl", "Demasiadas Peticiones",
-                                      "Limite superado. Espere 60s.", path);
+                        "Limite superado. Espere 60s.", path);
                 response.getWriter().write(json);
             }
         } else {

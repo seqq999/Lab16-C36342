@@ -33,26 +33,62 @@ public class Usuario {
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String hash) { this.passwordHash = hash; }
+    public String getUsername() {
+        return username;
+    }
 
-    public String getNombreCompleto() { return nombreCompleto; }
-    public void setNombreCompleto(String n) { this.nombreCompleto = n; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
-    public Rol getRol() { return rol; }
-    public void setRol(Rol rol) { this.rol = rol; }
+    public void setPasswordHash(String hash) {
+        this.passwordHash = hash;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String n) {
+        this.nombreCompleto = n;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

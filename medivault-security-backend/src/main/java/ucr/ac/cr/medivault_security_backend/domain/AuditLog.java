@@ -20,22 +20,25 @@ public class AuditLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50, updatable = false)
+    @Column(length = 50, updatable = false)
     private String username;
 
     @Column(name = "ip_origen", nullable = false, length = 45, updatable = false)
     private String ipOrigen;
 
-    @Column(nullable = false, length = 40, updatable = false)
+    @Column(nullable = false, length = 50, updatable = false)
     private String accion;
 
-    @Column(name = "codigo_http", nullable = false, updatable = false)
+    @Column(name = "codigo_estado", nullable = false, updatable = false)
     private int codigoHttp;
 
-    @Column(length = 255, updatable = false)
+    @Column(name = "recurso_solicitado", nullable = false, length = 255, updatable = false)
     private String recurso;
 
-    @Column(name = "fecha_evento", nullable = false, updatable = false)
+    @Column(name = "detalle_evento", length = 255, updatable = false)
+    private String detalleEvento;
+
+    @Column(name = "fecha_evento", updatable = false)
     private LocalDateTime fechaEvento;
 
     protected AuditLog() {
@@ -43,12 +46,22 @@ public class AuditLog {
 
     public AuditLog(String username, String ipOrigen, String accion,
             int codigoHttp, String recurso) {
+        this(username, ipOrigen, accion, codigoHttp, recurso, null);
+    }
+
+    public AuditLog(String username, String ipOrigen, String accion,
+            int codigoHttp, String recurso, String detalleEvento) {
         this.username = username;
         this.ipOrigen = ipOrigen;
         this.accion = accion;
         this.codigoHttp = codigoHttp;
         this.recurso = recurso;
+        this.detalleEvento = detalleEvento;
         this.fechaEvento = LocalDateTime.now();
+    }
+
+    public String getDetalleEvento() {
+        return detalleEvento;
     }
 
     // Solo getters: no existen setters para preservar la inmutabilidad
